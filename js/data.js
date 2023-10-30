@@ -21,3 +21,6 @@ const data = [
         }
     }
 ]
+
+const sectionsCount = data.length
+let currentSection = 0

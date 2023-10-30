@@ -1,5 +1,3 @@
-const sectionsCount = data.length
-
 function createHtmlELement(element, parrent, classes, ids, onClick, txt) {
     classes = classes.split("|")
     ids = ids.split("|")

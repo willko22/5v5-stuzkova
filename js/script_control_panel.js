@@ -1,7 +1,25 @@
 const bc = new BroadcastChannel("channel")
-// const scoreboard = window.open("../scoreboard.html")
+const scoreboard = window.open("../scoreboard.html")
 let currentAnswersCount
-let currentSection = 0
+
+
+document.addEventListener("keydown", (event) => {
+    let code = event.code
+    let value = event.key
+    
+    // next and prev section
+    if (code == "ArrowLeft")
+        bc.postMessage("change!-1")
+    if (code == "ArrowRight")
+        bc.postMessage("change!1")
+    
+
+    // change answer visibility
+    if (isFinite(value)){
+        value = value == 0 ? 10 : value
+        bc.postMessage("answer!" + value)
+    }
+});
 
 function firstLoad(){
     // bc.postMessage("loaded")
@@ -26,21 +44,31 @@ function loadButtons(section) {
     let counter = 1
     for (let a in data[section].a){
         if (counter > 4){
-            createHtmlELement("button", row2, "controlBtn", "btn" + counter, "test(" + counter + ")", counter + ". " + a)
+            createHtmlELement("button", row2, "controlBtn", "btn" + counter, "answerReveal(" + counter + ")", `<span class="number">${counter}</span>\n${a}`)
         } else {
-            createHtmlELement("button", row1, "controlBtn", "btn" + counter, "test(" + counter + ")", counter + ". " + a)
+            createHtmlELement("button", row1, "controlBtn", "btn" + counter, "answerReveal(" + counter + ")", `<span class="number">${counter}</span>\n${a}`)
         }
 
         counter++
     }
 
     // create action buttons 
-    createHtmlELement("button", actions, "controlBtn", "prev", "", "<--")
+    createHtmlELement("button", actions, "controlBtn", "prev", `changeSection(-1)`, "<--")
     createHtmlELement("button", actions, "controlBtn", "start", "", "start")
-    createHtmlELement("button", actions, "controlBtn", "next", "", "-->")
+    createHtmlELement("button", actions, "controlBtn", "next", `changeSection(1)`, "-->")
 
 }
 
-function test(number){
-    console.log(number)
+
+
+function answerReveal(number){
+    bc.postMessage("answer!" + number)
+}
+
+function changeSection(change){
+    if ( 0 <= (currentSection + change) && (currentSection + change) < sectionsCount ){
+        currentSection = currentSection + change
+        bc.postMessage("change!" + change)
+    }
+
 }

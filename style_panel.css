@@ -45,12 +45,22 @@ body {
 }
 
 .controlBtn {
-    
     background-color: #E18310;
 
-    width: 10rem;
-    height: 10rem;
-
-    border-radius: 30px;
+    
+    min-width: min-content;
+    max-height: 90%;
+    width: 20%;
+    aspect-ratio: 1.5/1 ;
+    
+    border-radius: 20px;
     border: 4px solid var(--a_border);
+
+    font-size: 1rem;
+    white-space: pre;
+}
+
+.number {
+    font-size: 2rem;
+    font-weight: bold;
 }

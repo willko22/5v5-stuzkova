@@ -1,31 +1,44 @@
 const bc = new BroadcastChannel("channel")
-let currentSection = 0
 
-document.addEventListener("keydown", (event) => {
-    let code = event.code
-    let value = event.key
-
-    // next and prev section
-    if (code == "ArrowLeft"){
-        prev()
-    } else if (code == "ArrowRight"){
-        next()
+bc.onmessage = (event) => {
+    let msg = event.data
+    
+    if (msg.includes("change!")){
+        changeSection(Number(msg.split("!")[1]))
     }
 
-    // change answer visibility
-
-    if (isFinite(value)){
-        value = value == 0 ? 10 : value
-        if (value <= currentAnswersCount) {
+    if (msg.includes("answer!")) {
+        let number = msg.split("!")[1]
+        if (number <= currentAnswersCount) {
             // console.log(currentColor)
-            newColor = document.getElementById("a" + value).style.color == "transparent" ? "black" : "transparent"
-            document.getElementById("a" + value).style.color = newColor
-            document.getElementById("s" + value).style.color = newColor
+            newColor = document.getElementById("a" + number).style.color == "transparent" ? "black" : "transparent"
+            document.getElementById("a" + number).style.color = newColor
+            document.getElementById("s" + number).style.color = newColor
             // console.log(value)
         }
     }
-});
 
+    
+}
+
+
+// document.addEventListener("keydown", (event) => {
+//     let code = event.code
+//     let value = event.key
+
+//     // next and prev section
+//     if (code == "ArrowLeft"){
+//         prev()
+//     } else if (code == "ArrowRight"){
+//         next()
+//     }
+
+//     // change answer visibility
+
+//     if (isFinite(value)){
+//         
+//     }
+// });
 
 function firstLoad(){
     let section = data[0]
@@ -87,15 +100,9 @@ function updateSection(pos) {
     } 
 }
 
-function next(){
-    if (currentSection < sectionsCount-1){       
-        currentSection++
-        updateSection(currentSection)
-    }
-}
-function prev() {
-    if (currentSection > 0){
-        currentSection--
-        updateSection(currentSection)
+function changeSection(change){ 
+    if ( 0 <= (currentSection + change) && (currentSection + change) < sectionsCount ){
+        currentSection += change
+        updateSection(currentSection) 
     }
 }

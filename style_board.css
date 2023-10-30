@@ -44,7 +44,7 @@ body {
 }
 
 .title {
-    font-size: 400%;
+    font-size: 12vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,10 +74,11 @@ body {
     width: 100%;
     max-height: 12%;
     padding-top: 1%;
+
+    font-size: 5vh;
 }
 
 .answer {
-    font-size: 250%;
     background: var(--answer);
     display: flex;
     flex: 1;
@@ -89,7 +90,7 @@ body {
 }
 
 .score {
-    font-size: 250%;
+    
     background: var(--score);
     display: flex;
     align-items: center;
