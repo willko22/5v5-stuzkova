@@ -7,7 +7,11 @@ const data = [
             "durikovicova": 15, 
             "meleshko": 12, 
             "grancic": 10,
-            "test": 50,        
+            "test": 50,
+            "tesst": 502,
+            "tst": 222,
+            "tessst": 222,
+
         }
     },
     {
@@ -17,7 +21,6 @@ const data = [
             "pavelka": 18, 
             "durikovicova": 15, 
             "meleshko": 12, 
-            "grancic": 10
         }
     }
 ]

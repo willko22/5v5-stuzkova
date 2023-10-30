@@ -1,8 +1,16 @@
 const bc = new BroadcastChannel("channel")
+let loaded = 0
+
 
 bc.onmessage = (event) => {
     let msg = event.data
     
+    if (msg == "load" && loaded != 1){
+        updateSection(0)
+        loaded = 1
+        bc.postMessage("load!done")
+    }
+
     if (msg.includes("change!")){
         changeSection(Number(msg.split("!")[1]))
     }
@@ -21,59 +29,6 @@ bc.onmessage = (event) => {
     
 }
 
-
-// document.addEventListener("keydown", (event) => {
-//     let code = event.code
-//     let value = event.key
-
-//     // next and prev section
-//     if (code == "ArrowLeft"){
-//         prev()
-//     } else if (code == "ArrowRight"){
-//         next()
-//     }
-
-//     // change answer visibility
-
-//     if (isFinite(value)){
-//         
-//     }
-// });
-
-function firstLoad(){
-    let section = data[0]
-    let answersCount = Object.keys(section.a).length
-    // console.log(answersCount)
-    for (let i = 1; i <= answersCount; i++) {
-        createItem(i)
-    }
-
-    updateSection(0)
-    
-}
-function createItem(number) {
-    // create item
-    let item = createHtmlELement("div", wrapper, "item", "i" + number)
-
-    // create answer
-    createHtmlELement("div", item, "answer", "a" + number)
-
-    // create score
-    createHtmlELement("div", item, "score", "s" + number)
-}
-
-
-function updateItemCount(count){
-    let itemsCount = document.getElementsByClassName("item").length
-    if (itemsCount > count) {
-        document.getElementById("i" + (itemsCount)).remove()
-    } else if (itemsCount < count) {
-        createItem(count)
-    }
-
-    
-}
-
 function updateSection(pos) {
     let current = data[pos]
     let answers = current.a
@@ -83,8 +38,25 @@ function updateSection(pos) {
 
     document.getElementById('question').textContent = current.q
 
-    updateItemCount(answersCount)
+    let itemsCount = document.getElementsByClassName("item").length
+    if (itemsCount > answersCount) {
 
+        for (let i= answersCount+1; i <= itemsCount; i++)
+            document.getElementById("i" + i).remove()
+        
+       
+    } else if (itemsCount < answersCount) {
+
+        for (let i= itemsCount+1; i <= answersCount; i++){
+            // create item
+            let item = createHtmlELement("div", wrapper, "item", "i" + i)
+            // create answer
+            createHtmlELement("div", item, "answer", "a" + i)
+            // create score
+            createHtmlELement("div", item, "score", "s" + i)
+        }   
+    }
+    
     let c = 1
     for (let i in answers){
         let a = document.getElementById('a' + c)

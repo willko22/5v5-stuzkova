@@ -1,23 +1,18 @@
 function createHtmlELement(element, parrent, classes, ids, onClick, txt) {
-    classes = classes.split("|")
-    ids = ids.split("|")
 
     let newElement = document.createElement(element)
-
-    for (let cls in classes) {
-        newElement.setAttribute("class", classes[cls])
-    }
-    for (let id in ids) {
-        console.log
-        newElement.setAttribute("id", ids[id])
-    }
-
-    newElement.setAttribute("onClick", onClick)
+        newElement.setAttribute("class", classes)
+        newElement.setAttribute("id", ids)
+        newElement.setAttribute("onClick", onClick)
 
     if (txt)
-    newElement.innerHTML = txt
+        newElement.innerHTML = txt
 
-    return parrent.appendChild(newElement)
+    
+    if (parrent)
+        return parrent.appendChild(newElement)
+    else
+     return newElement
 }
 
 function next(){
