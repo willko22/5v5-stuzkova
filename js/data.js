@@ -39,10 +39,10 @@ const data = [
     {
         "q": "Čo si najčastejšie študenti kupujú v bufete?",
         "a": {
-            "Meškal mi vlak/autobus": 22, 
-            "Zaspal/a som": 7, 
-            "Nemešákm": 4, 
-            "Bola zápcha": 3
+            "Toast": 20, 
+            "Bageta": 7, 
+            "Wafle": 3, 
+            "žuvačky": 2
         }
     }
 ]
