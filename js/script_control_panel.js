@@ -1,6 +1,6 @@
 const bc = new BroadcastChannel("channel")
 const size = "width=1920px,height=1080"
-const scoreboard = window.open("../scoreboard.html", "Scoreboard",size,true)
+const scoreboard = window.open("./scoreboard.html", "Scoreboard",size,true)
 
 
 bc.onmessage = (event) => {
