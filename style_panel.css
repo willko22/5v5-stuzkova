@@ -20,7 +20,6 @@ body {
     margin: 0;
     height: 90vh;
     align-items: center;
-    justify-content: center;
     padding-top: 5vh;
     padding-bottom: 5vh;
 }
@@ -36,25 +35,62 @@ body {
 
 }
 
-.row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(90vh /5);
-    width: 80%;
-    gap: 5%;
-    padding-top: 2%;
+#startBtn{
+    background-color: #E18310;
+
+    height: 20vh;
+    aspect-ratio: 1/1;
+    margin: 35vh 0;
+    padding: 0;
+    
+    border-radius: 20px;
+    border: 4px solid var(--a_border);
+
+    font-size: 2rem;
+    font-weight: bold;
+    white-space: pre;
 }
 
 #title {
-    font-size: 8vh;
+    font-size: 4rem;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
+
     width: 90%;
-    height: min-content;
-    /* margin-bottom: 1%; */
+    height: 20%;
+    min-height: min-content; 
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 60%;
+    width: 90%;
+    gap: 4%;
+    padding-top: 4%;
+}
+
+.row > * {
+    background-color: #E18310;
+    flex: 1 1 0;
+    
+    min-width: min-content;
+    max-height: 50%;
+    
+    border-radius: 20px;
+    border: 4px solid var(--a_border);
+
+    font-size: 2rem;
+    font-weight: bold;
+    white-space: pre;
+}
+
+.number {
+    font-size: 1.2rem;
 }
 
 .actions {
@@ -62,35 +98,32 @@ body {
     align-items: center;
     justify-content: center;
 
-    height: 25%;
+    height: 20%;
     width: 80%;
-    gap: 40%;
+    gap: 10%;
     padding-top: 4%;
 }
 
-.action {
-    font-size: 3rem;
-}
-
-.controlBtn {
+.actions > * {
     background-color: #E18310;
-
-    
-    min-width: min-content;
-
-    height: 100%;
-    width: 100%;
-    max-width: 50vw;
-    max-height: 50vh;
-    
     border-radius: 20px;
     border: 4px solid var(--a_border);
 
-    font-size: 1.2rem;
-    white-space: pre;
+    font-weight: bold;
+ 
+    height: 100%;
+    aspect-ratio: 1/1;
 }
 
-.number {
-    font-size: 2rem;
-    font-weight: bold;
+#prev, #next {
+    font-size: 4rem;
+}
+
+#wrong {
+    font-size: 4rem;
+}
+
+#resetWrong {
+    font-size: 2.5rem;
+
 }

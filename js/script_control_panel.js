@@ -1,5 +1,5 @@
 const bc = new BroadcastChannel("channel")
-const size = ""  //"width=1920px,height=1080"
+const size = "width=1920px,height=1080"
 const scoreboard = window.open("../scoreboard.html", "Scoreboard",size,true)
 
 
@@ -29,89 +29,88 @@ document.addEventListener("keydown", (event) => {
 
 
 function firstLoad(){
-    // bc.postMessage("loaded")
-    // bc.onmessage = (event) => {}
-    createStart()
-    // loadButtons(currentSection)
-}
 
-function createStart() {
-    // loadButtons(0)
-    createHtmlELement("button", document.body, "controlBtn", "start", `reveal()`, `<span class="action">Start</span>`)
-
+    createHtmlELement("button", document.body, "", "startBtn", `reveal()`, `<span class="action">Start</span>`)
 }
 
 function loadButtons(section) {
     let answersCount = Object.keys(data[currentSection].a).length
     // create div rows
     createHtmlELement("div",document.body, "", "title", "", data[currentSection].q )
-    createHtmlELement("div",document.body, "row", "row1")
-
-    if (answersCount > 4){
-        createHtmlELement("div",document.body, "row", "row2")
-    }
-
+    createHtmlELement("div",document.body, "row", "answersBtns")
     createHtmlELement("div",document.body, "actions", "actions")
 
     // create answer Buttons
     let counter = 1
     for (let a in data[section].a){
-        if (counter > 4){
-            createHtmlELement("button", row2, "controlBtn", "btn" + counter, "answerReveal(" + counter + ")", `<span class="number">${counter}</span>\n${a}`)
-        } else {
-            createHtmlELement("button", row1, "controlBtn", "btn" + counter, "answerReveal(" + counter + ")", `<span class="number">${counter}</span>\n${a}`)
-        }
-
+        createHtmlELement("button", answersBtns, "controlBtn", "btn" + counter, "answerReveal(" + counter + ")", `<span class="number">${counter}</span>\n${a}`)
         counter++
     }
 
     // create action buttons 
-    createHtmlELement("button", actions, "controlBtn", "prev", `changeSection(-1)`, `<span class="action">&larr;</span>`)
-    createHtmlELement("button", actions, "controlBtn", "next", `changeSection(1)`, `<span class="action">&rarr;</span>`)
+    createHtmlELement("button", actions, "", "prev", `changeSection(-1)`, `<span class="action">&larr;</span>`)
+    createHtmlELement("button", actions, "", "wrong", `wrong("+")`, `<span class="action">X</span>`)
+    createHtmlELement("button", actions, "", "resetWrong", `wrong(0)`, `<span class="action">Reset</span>`)
+    createHtmlELement("button", actions, "", "next", `changeSection(1)`, `<span class="action">&rarr;</span>`)
 
-}
-
-function reveal(){
-    bc.postMessage("load")
-    document.getElementById("start").remove()
-    // loadButtons(currentSection)  
-}
-
-function answerReveal(number){
-    bc.postMessage("answer!" + number)
 }
 
 function changeSection(change){
+
     if ( 0 <= (currentSection + change) && (currentSection + change) < sectionsCount ){
         currentSection = currentSection + change
         bc.postMessage("change!" + change)
     
 
-    let current = data[currentSection]
-    let answers = current.a
-    let answersCount = Object.keys(answers).length
-    document.getElementById('title').textContent = current.q
-
-    btnCount = document.getElementsByClassName("controlBtn").length -2
-
-    if (answersCount <= 4){
-        document.getElementById("row2").remove()
-
-    } else if (answersCount > 4 )
-        document.getElementById("row1").after(createHtmlELement("div","", "row", "row2"))
+        let current = data[currentSection]
+        let answers = current.a
         
-    if (btnCount < answersCount) {
-        for (let i= btnCount+1; i <= answersCount; i++)
-            createHtmlELement("button", row2, "controlBtn", "btn" + i, "answerReveal(" + i + ")", `<span class="number">${i}</span>\n${Object.entries(answers)[i-1][0]}`)
+        let answersCount = Object.keys(answers).length
+        document.getElementById('title').textContent = current.q
+
+        btnCount = document.getElementsByClassName("controlBtn").length
+        let answersBtns = document.getElementById("answersBtns")
+
+        let difference = answersCount - btnCount
+        console.log(difference);
+        if (btnCount < answersCount) {
+            for (let i= btnCount; i <= answersCount; i++)
+                createHtmlELement("button", answersBtns, "controlBtn", "btn" + i, "answerReveal(" + i + ")", `<span class="number">${i}</span>\n${Object.entries(answers)[i-1][0]}`)
+
+        } else if (btnCount > answersCount) {
+            for (let i = btnCount-1; i >= answersCount; i--){
+                console.log(i);
+                document.getElementById("btn" + i).remove()
+        }
+        }
+
+        let c = 1
+        for (let a in answers){
+            let btn = document.getElementById('btn' + c)
+
+            btn.innerHTML = `<span class="number">${c}</span>\n ${a}`     
+            c ++
+        } 
+
     }
+}
 
-    let c = 1
-    for (let a in answers){
-        let btn = document.getElementById('btn' + c)
-
-        btn.innerHTML = `<span class="number">${c}</span>\n ${a}`     
-        c ++
-    } 
+function wrong(action) {
+    if (action == 0){
+        bc.postMessage("wrong!0")
 
     }
+    if (action == "+"){
+        bc.postMessage("wrong!+")
+    }
+}
+
+
+function reveal(){
+    bc.postMessage("load")
+    document.getElementById("startBtn").remove()
+}
+
+function answerReveal(number){
+    bc.postMessage("answer!" + number)
 }

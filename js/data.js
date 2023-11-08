@@ -1,29 +1,53 @@
 const data = [
     {
-        "q": "naj ucitelia",
+        "q": "Pred ktorým učiteľom majú žiaci najväčší rešprekt",
         "a": {
-            "mesaros": 20, 
-            "pavelka": 18, 
-            "durikovicova": 15, 
-            "meleshko": 12, 
-            "grancic": 10,
-            "test": 50,
-            "tesst": 502,
-            "tst": 222,
-            "tessst": 222,
-
+            "Mendelová": 22, 
+            "Štefulová": 6, 
+            "Jurečková": 5, 
+            "Brajerová": 4
         }
     },
     {
-        "q": "najjjjjjj ucitelia",
+        "q": "Najčastejšia výhovorka, ked žiak mešká do školy",
         "a": {
-            "MESAROS": 20, 
-            "pavelka": 18, 
-            "durikovicova": 15, 
-            "meleshko": 12, 
+            "Meškal mi vlak/autobus": 22, 
+            "Zaspal/a som": 7, 
+            "Nemešákm": 4, 
+            "Bola zápcha": 3
+        }
+    },
+    {
+        "q": "Čo majú žiaci najradšej na Einteinovej",
+        "a": {
+            "Bufet": 15, 
+            "Marcelu Gregorcovú": 5, 
+            "Flórbalový runaj": 4, 
+            "Záchody v prístavku": 3
+        }
+    },
+    {
+        "q": "Ktoreho učitela majú žiaci najradšej?",
+        "a": {
+            "Gregorcová": 8, 
+            "Mesároš": 7, 
+            "Loffay": 6, 
+            "Juriková": 5,
+            "Štempelová": 3
+        }
+    },
+    {
+        "q": "Čo si najčastejšie študenti kupujú v bufete?",
+        "a": {
+            "Meškal mi vlak/autobus": 22, 
+            "Zaspal/a som": 7, 
+            "Nemešákm": 4, 
+            "Bola zápcha": 3
         }
     }
 ]
 
 const sectionsCount = data.length
 let currentSection = 0
+const maxIncorrect = 3
+let currentIncorrect = 0

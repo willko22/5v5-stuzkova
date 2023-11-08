@@ -26,6 +26,21 @@ bc.onmessage = (event) => {
         }
     }
 
+    if (msg.includes("wrong!")){
+        let action = msg.split("!")[1]
+
+        if (action == "+"){
+            currentIncorrect++
+            document.getElementById("x" + currentIncorrect).style.visibility = "visible"
+        } else if (action == 0){
+            currentIncorrect = 0
+            let nodes = document.getElementById("incorrects").childNodes
+            for (var i=0; i<nodes.length; i++)
+                nodes[i].style.visibility = "hidden"
+        }
+        console.log(action)
+    }
+
     
 }
 
@@ -57,6 +72,15 @@ function updateSection(pos) {
         }   
     }
     
+    let incorrectsWrapper = document.getElementById("incorrects")
+    for (let i = 1; i <= maxIncorrect; i++){
+        let currentWrong = document.getElementById("x" + i)
+        if (currentWrong == null){
+            createHtmlELement("div", incorrectsWrapper, "wrong", "x" + i,"","X")
+        }
+    }
+    
+
     let c = 1
     for (let i in answers){
         let a = document.getElementById('a' + c)
