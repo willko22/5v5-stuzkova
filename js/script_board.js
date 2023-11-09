@@ -1,7 +1,6 @@
 const bc = new BroadcastChannel("channel")
 let loaded = 0
 
-
 bc.onmessage = (event) => {
     let msg = event.data
     

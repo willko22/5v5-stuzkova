@@ -1,7 +1,8 @@
 const bc = new BroadcastChannel("channel")
 const size = "width=1920px,height=1080"
 const scoreboard = window.open("./scoreboard.html", "Scoreboard",size,true)
-
+const soundWrong = new Audio("./Audio/wrong-answer.mp3")
+const soundCorrect = new Audio("./Audio/correct-answer.wav")
 
 bc.onmessage = (event) => {
 
@@ -101,6 +102,7 @@ function wrong(action) {
 
     }
     if (action == "+"){
+        soundWrong.play()
         bc.postMessage("wrong!+")
     }
 }
@@ -112,5 +114,7 @@ function reveal(){
 }
 
 function answerReveal(number){
+    soundCorrect.play()
     bc.postMessage("answer!" + number)
+    
 }
