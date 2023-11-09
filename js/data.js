@@ -1,6 +1,6 @@
 const data = [
     {
-        "q": "Pred ktorým učiteľom majú žiaci najväčší rešprekt",
+        "q": "Pred ktorým učiteľom majú študenti najväčší rešprekt?",
         "a": {
             "Mendelová": 22, 
             "Štefulová": 6, 
@@ -9,25 +9,25 @@ const data = [
         }
     },
     {
-        "q": "Najčastejšia výhovorka, ked žiak mešká do školy",
+        "q": "Najčastejšia výhovorka, keď žiak mešká do školy",
         "a": {
             "Meškal mi vlak/autobus": 22, 
             "Zaspal/a som": 7, 
-            "Nemešákm": 4, 
+            "Nemeškám": 4, 
             "Bola zápcha": 3
         }
     },
     {
-        "q": "Čo majú žiaci najradšej na Einteinovej",
+        "q": "Čo majú študenti najradšej na Einsteinovej?",
         "a": {
             "Bufet": 15, 
             "Marcelu Gregorcovú": 5, 
-            "Flórbalový runaj": 4, 
+            "Flórbalový turnaj": 4, 
             "Záchody v prístavku": 3
         }
     },
     {
-        "q": "Ktoreho učitela majú žiaci najradšej?",
+        "q": "Ktorého učiteľa majú študenti najradšej?",
         "a": {
             "Gregorcová": 8, 
             "Mesároš": 7, 
@@ -42,7 +42,7 @@ const data = [
             "Toast": 20, 
             "Bageta": 7, 
             "Wafle": 3, 
-            "žuvačky": 2
+            "Žuvačky": 2
         }
     }
 ]
