@@ -18,7 +18,7 @@ bc.onmessage = (event) => {
         let number = msg.split("!")[1]
         if (number <= currentAnswersCount) {
             // console.log(currentColor)
-            newColor = document.getElementById("a" + number).style.color == "transparent" ? "black" : "transparent"
+            newColor = document.getElementById("a" + number).style.color == "transparent" ? "white" : "transparent"
             document.getElementById("a" + number).style.color = newColor
             document.getElementById("s" + number).style.color = newColor
             // console.log(value)
